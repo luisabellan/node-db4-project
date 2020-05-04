@@ -20,10 +20,13 @@
   },
   "homepage": "https://github.com/luisabellan/node-db4-project#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "knex": "^0.21.1",
     "knex-cleaner": "^1.3.0",
-    "nodemon": "^2.0.3",
     "sqlite": "^4.0.7",
     "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }

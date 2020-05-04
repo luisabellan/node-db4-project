@@ -2,12 +2,13 @@
 
 var express = require('express');
 
-var Recipes = require('./recipe-model');
+var Recipes = require('./recipe-model.js');
 
-var router = express.Router();
+var router = express.Router(); // all recipes (without details about ingredients or steps)
+
 router.get('/', function (req, res) {
-  Recipes.find().then(function (recipes) {
-    res.json(recipes);
+  Recipes.getRecipes().then(function (recipes) {
+    res.status(200).json(recipes);
   })["catch"](function (err) {
     res.status(500).json({
       message: 'Failed to get recipes'
@@ -18,7 +19,7 @@ router.get('/:id', function (req, res) {
   var id = req.params.id;
   Recipes.findById(id).then(function (recipe) {
     if (recipe) {
-      res.json(recipe);
+      res.status(200).json(recipe);
     } else {
       res.status(404).json({
         message: 'Could not find recipe with given id.'
@@ -29,23 +30,31 @@ router.get('/:id', function (req, res) {
       message: 'Failed to get recipes'
     });
   });
-}); //stretch
+}); // /api/recipes/:id/shoppingList
 
-router.get('/:id/steps', function (req, res) {
+router.get('/:id/shoppinglist', function (req, res) {
   var id = req.params.id;
-  Recipes.findSteps(id).then(function (steps) {
-    if (steps.length) {
-      // console.log(steps)
-      res.json(steps);
+  Recipes.getShoppingList(id).then(function (ingredients) {
+    if (ingredients) {
+      res.status(200).json(ingredients);
     } else {
       res.status(404).json({
-        message: 'Could not find steps for given recipe'
+        message: 'Could not find recipe with given id.'
       });
     }
-  })["catch"](function (err) {
-    res.status(500).json({
-      message: 'Failed to get steps'
-    });
+  });
+}); // /api/recipes/:id/instructions
+
+router.get('/:id/instructions', function (req, res) {
+  var id = req.params.id;
+  Recipes.getInstructions(id).then(function (instructions) {
+    if (instructions) {
+      res.status(200).json(instructions);
+    } else {
+      res.status(404).json({
+        message: 'Could not find recipe with given id.'
+      });
+    }
   });
 });
 router.post('/', function (req, res) {

@@ -1,1 +1,1 @@
-"use strict";module.exports={development:{client:"sqlite3",useNullAsDefault:!0,connection:{filename:"./data/recipe_book.db3"},migrations:{directory:"./data/migrations"},seeds:{directory:"./data/seeds"},pool:{afterCreate:function(e,t){e.run("PRAGMA foreign_keys = ON",t)}}}};
+"use strict";module.exports={development:{client:"sqlite3",useNullAsDefault:!0,connection:{filename:"./data/recipes.db3"},migrations:{directory:"./data/migrations"},seeds:{directory:"./data/seeds"},pool:{afterCreate:function(e,t){e.run("PRAGMA foreign_keys = ON",t)}}}};

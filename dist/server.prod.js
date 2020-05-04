@@ -1,1 +1,1 @@
-"use strict";var express=require("express"),RecipeRouter=require("./recipes/recipe-router.js"),server=express();server.use(express.json()),server.use("/api/recipes",RecipeRouter),module.exports=server;
+"use strict";var express=require("express"),RecipeRouter=require("./recipes/recipe-router.js"),IngredientRouter=require("./ingredients/ingredient-router.js"),server=express();server.use(express.json()),server.use("/api/recipes",RecipeRouter),module.exports=server;
